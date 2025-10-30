@@ -17,14 +17,14 @@ export function Home() {
 
     const [msg, setMsg] = useState(true)
 
-    useEffect(() => {
-        // console.log("inside use")
-        setTimeout(() => {
-            console.log("imkmmn")
-            setMsg(false)
-        }, 3000);
+    // useEffect(() => {
+    //     // console.log("inside use")
+    //     setTimeout(() => {
+    //         console.log("imkmmn")
+    //         setMsg(false)
+    //     }, 3000);
 
-    }, [msg])
+    // }, [msg])
 
     const cartoon = [{
         key: 1,
@@ -80,19 +80,13 @@ export function Home() {
 
     return (
         <>
-            {console.log(setMsg)}
-            {msg ? (
-                <div className="flex h-screen items-center justify-center">
-                    <h1 className="place-self-center font-serif text-8xl text-lime-600 text-center v">hii..welcome to my page</h1>
-                    {/* <img className="h-24 rounded-3xl ml-8" src={image7} /> */}
-                </div>
-            ) : (
+            
 
                 <div className=" bg-purple-200" >
                     <Discription  />
                     <Cards images={cartoon} imageData={data} />
                 </div>
-            )}
+            {/* )} */}
         </>
 
     )
