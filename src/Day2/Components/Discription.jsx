@@ -2,7 +2,6 @@
 
 import { useContext,createContext } from "react"
 import { useState } from "react";
-import { Discription2 } from "./Discription2";
 import { Discription1 } from "./discription1";
 
 export const UserContext = createContext();
@@ -19,11 +18,9 @@ export function Discription(){
 return(
     <>
      <UserContext.Provider value={user}>
-            <headingContext.Provider value={pageHeading}>
-                <Discription1 />
-                <Discription2 />
-            </headingContext.Provider>
+            <Discription1/>
         </UserContext.Provider>
+        <h1>hello...</h1>
     </>
 )
 }

@@ -28,13 +28,26 @@ function App(){
     return(
     <>
     <div className=" bg-purple-200">
-        <Home/>
-          {/* <Discription/> */}
+        {/* <Home/>      */}
+          <Discription/>
           {/* <Cards />  */}
 
     </div>
     </>
     )
 } 
+
+//day3
+
+// import { Home } from "../src/Day3/components/Home"
+
+// export function App(){
+//     return(
+//         <>
+//         <Home/>
+//         </>
+//     )
+// }
+
 
 export default App;
