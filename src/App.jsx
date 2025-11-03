@@ -20,22 +20,22 @@
 
 // day 2
 
-import { Home } from "./Day2/Components/Home";
-import { Discription } from "./Day2/Components/Discription";
-import { Cards } from "./Day2/Components/Cards";
+// import { Home } from "./Day2/Components/Home";
+// import { Discription } from "./Day2/Components/Discription";
+// import { Cards } from "./Day2/Components/Cards";
 
-function App(){
-    return(
-    <>
-    <div className=" bg-purple-200">
-        {/* <Home/>      */}
-          <Discription/>
-          {/* <Cards />  */}
+// function App(){
+//     return(
+//     <>
+//     <div className=" bg-purple-200">
+//         {/* <Home/>      */}
+//           <Discription/>
+//           {/* <Cards />  */}
 
-    </div>
-    </>
-    )
-} 
+//     </div>
+//     </>
+//     )
+// } 
 
 //day3
 
@@ -48,6 +48,26 @@ function App(){
 //         </>
 //     )
 // }
+
+//Day 4
+ 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Login } from "./Day 4/Components/login";
+import { Home } from "./Day 4/Components/Home";
+import {Signup} from "./Day 4/Components/Signup"
+import { Demo } from "./Day 4/Components/Demo";
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+         <Route path="/signup" element={<Signup/>} />
+          <Route path="/demo" element={<Demo/>} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 
 export default App;

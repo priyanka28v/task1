@@ -1,0 +1,23 @@
+.head{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.chat{
+    font-size: 60px;
+    color:blue;
+    font-weight: bold;
+}
+.paragraph{
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 700;
+}
+.form{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    margin-left:260px;
+}
