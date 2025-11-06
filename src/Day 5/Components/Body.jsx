@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useMemo, useRef } from "react";
+import { useEffect, useState, createContext, useMemo, useRef, useCallback } from "react";
 import product from "../../assets/product.webp";
 import { Card } from "./Card";
 import a1 from "../../assets/a1.jpeg";
@@ -9,20 +9,26 @@ import { Sellors } from "./Sellors";
 
 export const SellorContext = createContext();
 
-export const Body = ({searchInput}) => {
+export const Body = ({ searchInput }) => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
 
   const focusRef = useRef(null);
   const prevSearchRef = useRef("");
 
-  const sellorsName = [
+  const sellorsName = useMemo(() => [
     { name: "Simar", img: a1 },
     { name: "Ajay", img: a2 },
     { name: "Varun", img: a3 },
     { name: "Vikas", img: a4 },
-  ];
+  ], []); // ✅ Memoize static array
 
+  // 🟢 useCallback for search input handler
+  const handleSearchChange = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
+
+  // Fetch products once
   useEffect(() => {
     focusRef.current?.focus();
     fetch("https://fakestoreapi.com/products")
@@ -33,8 +39,8 @@ export const Body = ({searchInput}) => {
 
   useEffect(() => {
     prevSearchRef.current = search;
-    // console.log(prevSearchRef.current)
   }, [search]);
+
 
   const filteredProducts = useMemo(() => {
     return products.filter(
@@ -43,7 +49,6 @@ export const Body = ({searchInput}) => {
         p.count > 300
     );
   }, [products, search]);
-
 
   const sellorCards = useMemo(() => {
     return sellorsName.map((s, index) => (
@@ -61,6 +66,16 @@ export const Body = ({searchInput}) => {
     ));
   }, [sellorsName]);
 
+  const renderCard = useCallback((item) => (
+    <Card
+      key={item.id}
+      image={item.image}
+      title={item.title}
+      description={item.description}
+      price={item.price}
+    />
+  ), []);
+
   return (
     <SellorContext.Provider value={sellorsName}>
       <div
@@ -71,11 +86,12 @@ export const Body = ({searchInput}) => {
           Welcome to Product Store
         </h1>
 
+        
         <div className="text-center mt-8">
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleSearchChange}
             placeholder="Search products..."
             className="p-2 border border-gray-400 rounded-md w-80 text-lg"
             ref={searchInput}
@@ -84,15 +100,7 @@ export const Body = ({searchInput}) => {
 
         <div className="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((item) => (
-              <Card
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-              />
-            ))
+            filteredProducts.map(renderCard)
           ) : (
             <p className="text-center text-gray-500 text-xl col-span-full">
               No product found
@@ -100,7 +108,6 @@ export const Body = ({searchInput}) => {
           )}
         </div>
 
-        {/* Seller Section */}
         <h1 className="md:font-bold md:text-5xl md:mt-[40px] text-center text-pink-800">
           Our Top Sellers of Product Are...
         </h1>

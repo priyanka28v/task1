@@ -71,11 +71,32 @@
 
 
 // Day 5
-import {Home} from "./Day 5/Components/Home"
+// import {Home} from "./Day 5/Components/Home"
+// export const App=()=>{
+// return(
+//   <>
+//   <Home/>
+//   </>
+// )
+// }
+
+import { Home } from "./Day 6/Components/Home";
+import { BrowserRouter,Route,Routes } from "react-router-dom";
+import { Login } from "./Day 6/Components/Login";
+import { Signup } from "./Day 6/Components/Signup";
+import { Profile } from "./Day 6/Components/Profile";
+
 export const App=()=>{
 return(
   <>
-  <Home/>
+  <BrowserRouter>
+  <Routes>
+    <Route path='/' element ={<Home/>}/>
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/signup" element={<Signup/>}/>
+    <Route path='/profile' element={<Profile/>}/>
+  </Routes>
+  </BrowserRouter>
   </>
 )
 }
